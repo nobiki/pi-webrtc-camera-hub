@@ -47,7 +47,7 @@ services:
       - "53:53/udp"
       - "53:53/tcp"
     extra_hosts:
-      - "camera-hub.local:192.168.2.225"
-      - "socket.camera-hub.local:192.168.2.225"
+      - "camera-hub.local:192.168.2.204"
+      - "socket.camera-hub.local:192.168.2.204"
     cap_add:
       - NET_ADMIN
