@@ -3,7 +3,7 @@
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>multi party</title>
- <script src="https://socket.webrtc.local/socket.io/socket.io.js"></script>
+ <script src="https://socket.camera-hub.local/socket.io/socket.io.js"></script>
  <script>
    function _assert(desc, v) {
      if (v) {
@@ -25,8 +25,9 @@
   <link rel="stylesheet" href="gallery.css" />
 </head>
 <body>
+  <small><a href="https://socket.camera-hub.local/socket.io/socket.io.js">socket.io.js</a><br></small>
   <div>
-    <video id="local_video" class="gallery" autoplay controls></video>
+    <video id="local_video" class="gallery" autoplay controls muted></video>
   </div>
   <div id="container">
   </div>
@@ -126,7 +127,7 @@
   --*/
 
   // ----- use socket.io ---
-  let socket = io.connect('https://socket.webrtc.local/');
+  let socket = io.connect('https://socket.camera-hub.local/');
   let room = getRoomName();
   socket.on('connect', function(evt) {
     console.log('socket.io connected. enter room=' + room );
@@ -298,6 +299,7 @@
     let video = createVideoElement('remote_video_' + id);
     video.className = "gallery";
     video.controls = true;
+    video.muted = true;
     remoteVideos[id] = video;
     return video;
   }

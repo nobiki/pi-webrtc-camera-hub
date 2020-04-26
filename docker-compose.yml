@@ -25,9 +25,9 @@ services:
   camera-hub-portal:
     image: steveltn/https-portal:1
     container_name: camera-hub-portal
-    # ports:
-    #   - 80:80
-    #   - 443:443
+    ports:
+      - 80:80
+      - 443:443
     restart: always
     environment:
       DOMAINS: 'camera-hub.local -> http://camera-hub-web:80, socket.camera-hub.local -> http://camera-hub-node:80'
