@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+  # Socket
+  camera-hub-node:
+    image: node:12.16.0-alpine
+    working_dir: /app
+    # ports:
+    #   - 3002:3002
+    volumes:
+      - ./app:/app
+    command: ["signaling_server"]
+
+  # Web
+  camera-hub-web:
+    image: nginx:alpine
+    working_dir: /web
+    # ports:
+    #   - 10080:80
+    volumes:
+      - ./web:/usr/share/nginx/html
+
+  # SSL Reverse Proxy
+  camera-hub-portal:
+    image: steveltn/https-portal:1
+    container_name: camera-hub-portal
+    # ports:
+    #   - 80:80
+    #   - 443:443
+    restart: always
+    environment:
+      DOMAINS: 'camera-hub.local -> http://camera-hub-web:80, socket.camera-hub.local -> http://camera-hub-node:80'
+      WEBSOCKET: "true"
+      STAGE: local
+    volumes:
+      - ./ssl-certs:/var/lib/https-portal
+    depends_on:
+      - camera-hub-web
+      - camera-hub-node
+
+  # Local DNS Server
+  camera-hub-dnsmasq:
+    image: andyshinn/dnsmasq
+    container_name: camera-hub-dnsmasq
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    extra_hosts:
+      - "camera-hub.local:192.168.2.225"
+      - "socket.camera-hub.local:192.168.2.225"
+    cap_add:
+      - NET_ADMIN
