@@ -1,5 +1,7 @@
 # pi-webrtc-camera-hub
 
+[古いスマホをWebRTCで監視カメラにした時のメモ | 7me](https://7me.oji.0j0.jp/2020/05/06/webrtc-smartphone-camera-memo/)
+
 #### Install Node Package
 
 ```
