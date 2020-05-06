@@ -4,6 +4,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>multi party</title>
  <script src="https://socket.camera-hub.local/socket.io/socket.io.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
  <script>
    function _assert(desc, v) {
      if (v) {
@@ -15,6 +16,13 @@
      }
    }
   </script>
+ <script>
+     $(function() {
+         $("#smartopen, #smartclose").bind("click", function (){
+             $("#smartmenu").slideToggle("fast");
+         });
+     });
+ </script>
 
   <!-- smartmenu -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +33,8 @@
   <link rel="stylesheet" href="gallery.css" />
 </head>
 <body>
-  <small><a href="https://socket.camera-hub.local/socket.io/socket.io.js">socket.io.js</a><br></small>
+  <small><a href="https://socket.camera-hub.local/socket.io/socket.io.js">socket.io.js</a></small>
+  <br>
   <div>
     <video id="local_video" class="gallery" autoplay controls muted></video>
   </div>
@@ -47,7 +56,10 @@
     <textarea id="text_for_receive_sdp" rows="5" cols="60"></textarea>
   </p>
   -->
+  <br clear="all">
+  <small><a href="#" id="smartopen">smartmenu</a></small>
   <div id="smartmenu">
+    <div id="smartclose"></div>
     <table>
     <tr>
       <td>
